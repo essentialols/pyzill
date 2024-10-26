@@ -9,6 +9,7 @@ def for_sale(
     sw_lat: float,
     sw_long: float,
     zoom_value: int,
+    custom_region_id: Optional[str] = None,
     proxy_url: str | None = None,
 ) -> dict[str, Any]:
     """get results of the listing that are for sale, you will get a dictionary with the keywords
@@ -183,6 +184,10 @@ def search(
         "requestId": 10,
         "isDebugRequest": False,
     }
+
+	
+     if custom_region_id:
+	inputData["searchQueryState"]["customRegionId"] = custom_region_id
 
     proxies = {"http": proxy_url, "https": proxy_url} if proxy_url else None
     response = put(
